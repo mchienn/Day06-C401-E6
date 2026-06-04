@@ -1,9 +1,8 @@
 # Team Information
----
 
-**Team:** C401.E6
+* **Team:** C401.E6
 
-**Danh sách thành viên nhóm**
+* **Danh sách thành viên nhóm**
 
 | # | Name | ID |
 | :-: | :--- | :--: |
