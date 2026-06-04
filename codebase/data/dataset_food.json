@@ -1,0 +1,137 @@
+[
+    {
+        "id": 1,
+        "name": "Phở Thìn Bờ Hồ",
+        "loai": "đồ nước",
+        "vi": "thanh đạm, truyền thống, bò",
+        "gia": 55000,
+        "khoang_cach_km": 1.2,
+        "thanh_phan": ["bánh phở", "thịt bò", "hành", "gừng", "quế", "hồi"]
+    },
+    {
+        "id": 2,
+        "name": "Bún Mọc Thanh Mai",
+        "loai": "đồ nước",
+        "vi": "thanh đạm, mọc, sườn",
+        "gia": 45000,
+        "khoang_cach_km": 0.8,
+        "thanh_phan": ["bún", "mọc", "sườn", "nấm", "hành"]
+    },
+    {
+        "id": 3,
+        "name": "Hủ Tiếu Nam Vang Thành Đạt",
+        "loai": "đồ nước",
+        "vi": "đậm đà, tôm, thịt bằm",
+        "gia": 50000,
+        "khoang_cach_km": 2.5,
+        "thanh_phan": ["hủ tiếu", "tôm", "thịt bằm", "gan", "hải sản"]
+    },
+    {
+        "id": 4,
+        "name": "Bún Chả Nem Cua Bể",
+        "loai": "đồ khô",
+        "vi": "đậm đà, chua ngọt, nướng",
+        "gia": 60000,
+        "khoang_cach_km": 1.5,
+        "thanh_phan": ["bún", "chả nướng", "nem cua", "nước mắm", "rau sống"]
+    },
+    {
+        "id": 5,
+        "name": "Cơm Tấm Ba Ghiền",
+        "loai": "đồ khô",
+        "vi": "đậm đà, sườn bì chả",
+        "gia": 55000,
+        "khoang_cach_km": 4.8,
+        "thanh_phan": ["cơm tấm", "sườn nướng", "bì", "chả trứng", "mỡ hành"]
+    },
+    {
+        "id": 6,
+        "name": "Mì Trộn Tên Lửa",
+        "loai": "đồ khô",
+        "vi": "cay, đậm đà, mì gói",
+        "gia": 35000,
+        "khoang_cach_km": 2.1,
+        "thanh_phan": ["mì gói", "trứng", "bò viên", "rau", "tương ớt"]
+    },
+    {
+        "id": 7,
+        "name": "Bún Đậu Mắm Tôm Chí Phèo",
+        "loai": "đồ khô",
+        "vi": "đậm đà, mắm tôm",
+        "gia": 65000,
+        "khoang_cach_km": 1.1,
+        "thanh_phan": ["bún", "đậu hũ", "mắm tôm", "thịt luộc", "chả cốm"]
+    },
+    {
+        "id": 8,
+        "name": "Gỏi Cuốn & Bánh Xèo Bà Hai",
+        "loai": "ăn vặt",
+        "vi": "thanh đạm, cuốn",
+        "gia": 40000,
+        "khoang_cach_km": 1.7,
+        "thanh_phan": ["bánh tráng", "tôm", "thịt", "rau sống", "đậu phộng", "nước mắm"]
+    },
+    {
+        "id": 9,
+        "name": "Mì Quảng Mỹ Sơn",
+        "loai": "đồ nước",
+        "vi": "đậm đà, miền trung",
+        "gia": 50000,
+        "khoang_cach_km": 2.9,
+        "thanh_phan": ["mì quảng", "tôm", "thịt", "trứng", "đậu phộng", "rau sống"]
+    },
+    {
+        "id": 10,
+        "name": "Súp Cua Hạnh",
+        "loai": "ăn vặt",
+        "vi": "thanh đạm, súp",
+        "gia": 25000,
+        "khoang_cach_km": 0.5,
+        "thanh_phan": ["cua", "trứng", "bắp", "nấm", "bột năng"]
+    },
+    {
+        "id": 11,
+        "name": "Bún Riêu Nguyễn Cảnh Chân",
+        "loai": "đồ nước",
+        "vi": "đậm đà, chua cay, riêu cua",
+        "gia": 45000,
+        "khoang_cach_km": 1.9,
+        "thanh_phan": ["bún", "riêu cua", "đậu hũ", "cà chua", "mắm tôm"]
+    },
+    {
+        "id": 12,
+        "name": "Cháo Lòng Bà Út",
+        "loai": "đồ nước",
+        "vi": "đậm đà, nóng sốt",
+        "gia": 35000,
+        "khoang_cach_km": 1.3,
+        "thanh_phan": ["gạo", "lòng heo", "huyết", "hành", "tiêu"]
+    },
+    {
+        "id": 13,
+        "name": "Bún Bò Huế Đông Ba",
+        "loai": "đồ nước",
+        "vi": "đậm đà, cay, bò",
+        "gia": 55000,
+        "khoang_cach_km": 5.2,
+        "thanh_phan": ["bún", "bò", "giò heo", "mắm ruốc", "sả", "ớt"]
+    },
+    {
+        "id": 14,
+        "name": "Pad Thai King",
+        "loai": "đồ khô",
+        "vi": "chua ngọt, cay",
+        "gia": 65000,
+        "khoang_cach_km": 2.2,
+        "thanh_phan": ["phở xào", "tôm", "đậu phộng", "giá", "trứng", "chanh"]
+    },
+    {
+        "id": 15,
+        "name": "Salad Ức Gà Healthy",
+        "loai": "đồ khô",
+        "vi": "thanh đạm, ít béo",
+        "gia": 55000,
+        "khoang_cach_km": 0.6,
+        "thanh_phan": ["ức gà", "rau xanh", "cà chua", "dầu olive", "hạt chia"]
+    }
+]
