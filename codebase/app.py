@@ -22,39 +22,41 @@ VERSIONS = ["v0", "v1", "v2", "v3"]
 
 PAGE_STYLE = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
 
-    /* Global canvas */
+    /* Global Flat Canvas */
     .stApp {
-        background-color: #F5F5F5 !important;
-        font-family: 'Inter', sans-serif !important;
+        background-color: #FFFFFF !important;
+        color: #111827 !important;
+        font-family: 'Outfit', sans-serif !important;
     }
 
-    /* Sidebar customize */
+    /* Sidebar customize - Solid Color Block style */
     section[data-testid="stSidebar"] {
-        background-color: #FFFFFF !important;
-        border-right: 1px solid #EBEBEB !important;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.02) !important;
+        background-color: #F3F4F6 !important;
+        border-right: 2px solid #E5E7EB !important;
+        box-shadow: none !important;
     }
 
     section[data-testid="stSidebar"] .stMarkdown h2,
     section[data-testid="stSidebar"] .stMarkdown h3 {
-        color: #222222 !important;
-        font-weight: 700 !important;
+        color: #111827 !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.02em !important;
     }
 
-    /* Header Banner styling */
+    /* Header Banner styling - Crisp Blue block */
     .main-header {
-        background-color: #FFFFFF;
-        padding: 1.25rem 2rem;
-        border-radius: 16px;
-        border: 1px solid #EBEBEB;
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-        margin-bottom: 2rem;
+        background-color: #3B82F6;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: none !important;
+        margin-bottom: 2.5rem;
         text-align: center;
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: #EE4D2D;
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: #FFFFFF;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -64,27 +66,29 @@ PAGE_STYLE = """
     /* Tool execution badge */
     .tool-badge {
         display: inline-block;
-        padding: 2px 8px;
-        border-radius: 4px;
+        padding: 4px 10px;
+        border-radius: 6px;
         font-size: 0.75rem;
         font-weight: 600;
-        background: #F5F5F5;
-        color: #757575;
+        background: #F3F4F6;
+        color: #111827;
         margin-right: 4px;
+        border: 2px solid #E5E7EB;
     }
-    .tool-badge.error { background: #FFF0ED; color: #EE4D2D; }
-    .tool-badge.success { background: #FFF0ED; color: #26AA99; }
+    .tool-badge.error { background: #FFF0ED; color: #EF4444; border-color: #EF4444; }
+    .tool-badge.success { background: #ECFDF5; color: #10B981; border-color: #10B981; }
 
-    /* Metric boxes in sidebar */
+    /* Metric boxes in sidebar - Clean flat gray blocks */
     .metric-box {
-        background: #FFF0ED;
-        border: 1px solid #FFF0ED;
-        border-radius: 12px;
+        background: #FFFFFF;
+        border: 2px solid #E5E7EB;
+        border-radius: 8px;
         padding: 0.75rem 1rem;
         margin: 0.5rem 0;
+        box-shadow: none !important;
     }
-    .metric-box .label { font-size: 0.7rem; color: #EE4D2D; text-transform: uppercase; font-weight: 600; }
-    .metric-box .value { font-size: 1.3rem; font-weight: 700; color: #EE4D2D; }
+    .metric-box .label { font-size: 0.75rem; color: #111827; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+    .metric-box .value { font-size: 1.4rem; font-weight: 800; color: #3B82F6; }
 
     /* Chat bubble container styling */
     .chat-container {
@@ -100,26 +104,19 @@ PAGE_STYLE = """
 
     /* Custom Streamlit chat message wraps */
     div[data-testid="stChatMessage"] {
-        padding: 1rem 1.25rem !important;
-        margin-bottom: 1rem !important;
-        border-radius: 16px !important;
+        padding: 1.25rem !important;
+        margin-bottom: 1.25rem !important;
+        border-radius: 8px !important;
         max-width: 80% !important;
-        animation: bubbleUp 0.3s ease-out;
+        box-shadow: none !important;
+        border: none !important;
     }
 
-    @keyframes bubbleUp {
-        from { opacity: 0; transform: translateY(8px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* User messages (Shopee Orange) */
+    /* User messages - Solid Blue Block */
     div[data-testid="stChatMessageUser"] {
-        background-color: #EE4D2D !important;
+        background-color: #3B82F6 !important;
         color: #FFFFFF !important;
         margin-left: auto !important;
-        border-bottom-right-radius: 2px !important;
-        box-shadow: 0 4px 12px rgba(238, 77, 45, 0.12) !important;
-        border: none !important;
     }
     div[data-testid="stChatMessageUser"] p,
     div[data-testid="stChatMessageUser"] span,
@@ -127,27 +124,25 @@ PAGE_STYLE = """
         color: #FFFFFF !important;
     }
 
-    /* Assistant messages (Pure White Surface) */
+    /* Assistant messages - Solid Light Gray Block */
     div[data-testid="stChatMessageAssistant"] {
-        background-color: #FFFFFF !important;
-        color: #222222 !important;
+        background-color: #F3F4F6 !important;
+        color: #111827 !important;
         margin-right: auto !important;
-        border-bottom-left-radius: 2px !important;
-        border: 1px solid #EBEBEB !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
     }
     div[data-testid="stChatMessageAssistant"] p,
     div[data-testid="stChatMessageAssistant"] span,
     div[data-testid="stChatMessageAssistant"] div {
-        color: #222222 !important;
+        color: #111827 !important;
     }
 
     /* Expander detail box */
     .stExpander {
         background-color: #FFFFFF !important;
-        border-radius: 12px !important;
-        border: 1px solid #EBEBEB !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+        border-radius: 8px !important;
+        border: 2px solid #E5E7EB !important;
+        box-shadow: none !important;
+        margin-top: 0.5rem !important;
     }
 
     /* Custom Responsive Grid for Food Cards */
@@ -155,29 +150,29 @@ PAGE_STYLE = """
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1.25rem;
-        margin: 1rem 0;
+        margin: 1.25rem 0;
         width: 100%;
     }
 
     .food-card {
-        background-color: #FFFFFF;
-        border-radius: 16px;
-        border: 1px solid #EBEBEB;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        background-color: #F3F4F6;
+        border-radius: 8px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease;
+        border: 2px solid transparent;
+        box-shadow: none !important;
     }
 
     .food-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-        border-color: #FFF0ED;
+        transform: scale(1.02);
+        background-color: #E5E7EB;
+        border-color: #3B82F6;
     }
 
     .food-card-header {
-        background-color: #FFF0ED;
+        background-color: #3B82F6;
         padding: 0.8rem 1rem;
         display: flex;
         justify-content: space-between;
@@ -189,7 +184,7 @@ PAGE_STYLE = """
     }
 
     .food-tag {
-        background-color: #26AA99;
+        background-color: #10B981;
         color: #FFFFFF;
         font-size: 0.65rem;
         font-weight: 700;
@@ -199,32 +194,32 @@ PAGE_STYLE = """
     }
 
     .food-card-body {
-        padding: 1rem;
+        padding: 1.25rem;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        gap: 0.4rem;
+        gap: 0.5rem;
     }
 
     .food-title {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: #222222;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #111827;
         line-height: 1.3;
     }
 
     .food-meta {
-        font-size: 0.75rem;
-        color: #757575;
+        font-size: 0.8rem;
+        color: #4B5563;
         display: flex;
         align-items: center;
         gap: 0.4rem;
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .meta-dot {
-        font-weight: 700;
-        color: #EBEBEB;
+        font-weight: 800;
+        color: #9CA3AF;
     }
 
     .food-tags {
@@ -235,27 +230,27 @@ PAGE_STYLE = """
     }
 
     .tag-pill {
-        background-color: #F5F5F5;
-        color: #757575;
-        font-size: 0.7rem;
-        padding: 0.15rem 0.5rem;
-        border-radius: 9999px;
-        font-weight: 500;
+        background-color: #FFFFFF;
+        color: #111827;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-weight: 600;
+        border: 1px solid #E5E7EB;
     }
 
     .food-reason {
-        font-size: 0.75rem;
-        color: #757575;
+        font-size: 0.8rem;
+        color: #4B5563;
         line-height: 1.4;
-        border-left: 2px solid #EE4D2D;
+        border-left: 3px solid #3B82F6;
         padding-left: 0.5rem;
         margin-top: 0.25rem;
-        font-style: italic;
     }
 
     .food-card-footer {
-        padding: 0.8rem 1rem;
-        border-top: 1px solid #EBEBEB;
+        padding: 1rem 1.25rem;
+        border-top: 2px solid #E5E7EB;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -263,27 +258,28 @@ PAGE_STYLE = """
     }
 
     .food-price {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #EE4D2D;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #3B82F6;
     }
 
     .food-btn {
-        background-color: #EE4D2D;
+        background-color: #3B82F6;
         color: #FFFFFF;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         font-weight: 700;
-        padding: 0.35rem 0.85rem;
-        border-radius: 9999px;
+        padding: 0.45rem 1rem;
+        border-radius: 6px;
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition: all 0.2s;
         border: none;
     }
     .food-btn:hover {
-        background-color: #d73e21;
+        background-color: #2563EB;
+        transform: scale(1.05);
     }
 
-    /* Suggestion Chips Section */
+    /* Suggestion Chips Section - Flat outline buttons */
     .suggestion-container {
         display: flex;
         flex-wrap: wrap;
@@ -295,41 +291,40 @@ PAGE_STYLE = """
     }
 
     div.stButton > button {
-        border-radius: 9999px !important;
-        border: 1px solid #EE4D2D !important;
+        border-radius: 6px !important;
+        border: 2px solid #3B82F6 !important;
         background-color: #FFFFFF !important;
-        color: #EE4D2D !important;
-        padding: 0.3rem 1rem !important;
-        font-size: 0.8rem !important;
-        font-weight: 600 !important;
+        color: #3B82F6 !important;
+        padding: 0.4rem 1.2rem !important;
+        font-size: 0.85rem !important;
+        font-weight: 700 !important;
         transition: all 0.2s ease !important;
-        box-shadow: 0 2px 4px rgba(238,77,45,0.03) !important;
+        box-shadow: none !important;
     }
 
     div.stButton > button:hover {
-        background-color: #EE4D2D !important;
+        background-color: #3B82F6 !important;
         color: #FFFFFF !important;
-        border-color: #EE4D2D !important;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(238,77,45,0.12) !important;
+        border-color: #3B82F6 !important;
+        transform: scale(1.05) !important;
     }
 
     /* Custom Input Control styling */
     div[data-testid="stChatInput"] {
         background-color: #FFFFFF !important;
-        border-top: 1px solid #EBEBEB !important;
-        box-shadow: 0 -4px 10px rgba(0,0,0,0.02) !important;
+        border-top: 2px solid #E5E7EB !important;
+        box-shadow: none !important;
     }
     div[data-testid="stChatInput"] textarea {
-        background-color: #F5F5F5 !important;
-        border-radius: 20px !important;
-        border: 1px solid #EBEBEB !important;
-        padding: 0.5rem 1rem !important;
-        color: #222222 !important;
+        background-color: #F3F4F6 !important;
+        border-radius: 6px !important;
+        border: 2px solid #E5E7EB !important;
+        padding: 0.6rem 1.2rem !important;
+        color: #111827 !important;
     }
     div[data-testid="stChatInput"] textarea:focus {
-        border-color: #EE4D2D !important;
-        box-shadow: 0 0 0 1px #EE4D2D !important;
+        border-color: #3B82F6 !important;
+        background-color: #FFFFFF !important;
     }
     footer { visibility: hidden; }
 </style>
@@ -594,7 +589,7 @@ with st.sidebar:
     st.caption(f"Artifacts: system_prompt.md / tools.yaml @ {version}")
 
 # --- Header ---
-st.markdown('<div class="main-header">🍜 Smart Food Finder — AI Gợi Ý Món Ăn</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-header">SMART FOOD FINDER</div>', unsafe_allow_html=True)
 
 # --- Tool count summary ---
 enabled = [t["name"] for t in tool_declarations]
