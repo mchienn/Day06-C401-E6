@@ -1,0 +1,99 @@
+{
+  "dataset_id": "eval_base",
+  "dataset_role": "food_recommendation_evaluation",
+  "description": "Base evaluation dataset for Smart Food Finder",
+  "cases": [
+    {
+      "id": "case_01_happy_path",
+      "phase": "B",
+      "failure_type": "wrong_arg_value",
+      "input": "Tôi muốn ăn đồ nước, thanh đạm, loanh quanh Quận 1, không đậu phộng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "food_recommendation",
+            "args": {
+              "loai_mon": "đồ nước",
+              "vi": "thanh đạm",
+              "di_ung": ["đậu phộng"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "case_02_allergy_filter",
+      "phase": "B",
+      "failure_type": "wrong_arg_value",
+      "input": "Tôi muốn ăn gì đó đồ khô đậm đà nhưng tôi bị dị ứng đậu phộng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "food_recommendation",
+            "args": {
+              "loai_mon": "đồ khô",
+              "vi": "đậm đà",
+              "di_ung": ["đậu phộng"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "case_03_distance_filter",
+      "phase": "B",
+      "failure_type": "wrong_boundary",
+      "input": "Tôi muốn ăn salad ở gần đây dưới 2km.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "food_recommendation",
+            "args": {
+              "ban_kinh_km": 2.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "case_04_low_confidence",
+      "phase": "B",
+      "failure_type": "missing_info",
+      "input": "Ăn gì cũng được, vừa cay lại vừa thanh đạm, no nhưng nhẹ bụng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify"
+          }
+        ]
+      }
+    },
+    {
+      "id": "case_05_empty_result",
+      "phase": "B",
+      "failure_type": "wrong_boundary",
+      "input": "Tôi muốn ăn đồ nước cay nhưng ngân sách chỉ có 10k.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "food_recommendation",
+            "args": {
+              "loai_mon": "đồ nước",
+              "vi": "cay",
+              "ngan_sach": 10000
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "case_06_out_of_scope",
+      "phase": "B",
+      "failure_type": "out_of_scope",
+      "input": "Làm sao để giải phương trình bậc hai?",
+      "expect": {
+        "no_tool": true
+      }
+    }
+  ]
+}
