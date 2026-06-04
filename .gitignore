@@ -7,3 +7,6 @@ __pycache__/
 *.pyc
 runs/
 transcripts/
+!codebase/transcripts/
+codebase/transcripts/*
+!codebase/transcripts/.gitkeep

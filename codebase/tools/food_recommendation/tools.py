@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any
 
-from tools._shared import ROOT, err 
+from tools._shared import ROOT, err
 
 FOOD_DATA_FILE = ROOT / "data" / "dataset_food.json"
 
@@ -81,6 +80,7 @@ def filter_and_recommend_food(
                 "loai": mon["loai"],
                 "vi": mon["vi"],
                 "gia": mon["gia"],
+                "thanh_phan": mon["thanh_phan"],
                 "khoang_cach_km": mon["khoang_cach_km"],
                 "ly_do_goi_y": f"Khớp {mon['match_score']}/2 tiêu chí của bạn. An toàn dị ứng. Cách {mon['khoang_cach_km']}km." 
             })

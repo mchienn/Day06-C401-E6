@@ -1,13 +1,14 @@
 {
-  "dataset_id": "eval_base",
-  "dataset_role": "food_recommendation_evaluation",
-  "description": "Base evaluation dataset for Smart Food Finder",
+  "dataset_id": "smart_food_finder_eval_base",
+  "dataset_role": "Base evaluation cases for the Shopee Food recommendation agent",
+  "description": "Các test case kiểm tra việc chọn tool và truyền tham số cho chatbot gợi ý món ăn.",
   "cases": [
     {
-      "id": "case_01_happy_path",
+      "id": "food_basic_water_mild",
       "phase": "B",
+      "suite": "base",
       "failure_type": "wrong_arg_value",
-      "input": "Tôi muốn ăn đồ nước, thanh đạm, loanh quanh Quận 1, không đậu phộng.",
+      "input": "Mình muốn ăn đồ nước vị thanh đạm, không dị ứng gì, trong bán kính 3km.",
       "expect": {
         "tool_calls": [
           {
@@ -15,84 +16,132 @@
             "args": {
               "loai_mon": "đồ nước",
               "vi": "thanh đạm",
-              "di_ung": ["đậu phộng"]
+              "di_ung": [],
+              "ban_kinh_km": 3.0,
+              "ngan_sach": 0
             }
           }
         ]
       }
     },
     {
-      "id": "case_02_allergy_filter",
+      "id": "food_budget_spicy_dry",
       "phase": "B",
+      "suite": "base",
       "failure_type": "wrong_arg_value",
-      "input": "Tôi muốn ăn gì đó đồ khô đậm đà nhưng tôi bị dị ứng đậu phộng.",
+      "input": "Gợi ý món đồ khô cay, ngân sách tối đa 40000, mình không dị ứng.",
       "expect": {
         "tool_calls": [
           {
             "name": "food_recommendation",
             "args": {
               "loai_mon": "đồ khô",
-              "vi": "đậm đà",
-              "di_ung": ["đậu phộng"]
+              "vi": "cay",
+              "di_ung": [],
+              "ban_kinh_km": 3.0,
+              "ngan_sach": 40000
             }
           }
         ]
       }
     },
     {
-      "id": "case_03_distance_filter",
+      "id": "food_allergy_peanut",
       "phase": "B",
-      "failure_type": "wrong_boundary",
-      "input": "Tôi muốn ăn salad ở gần đây dưới 2km.",
+      "suite": "base",
+      "failure_type": "wrong_arg_value",
+      "input": "Tôi muốn ăn vặt vị thanh đạm, tránh đậu phộng, gần dưới 2km.",
       "expect": {
         "tool_calls": [
           {
             "name": "food_recommendation",
             "args": {
-              "ban_kinh_km": 2.0
+              "loai_mon": "ăn vặt",
+              "vi": "thanh đạm",
+              "di_ung": ["đậu phộng"],
+              "ban_kinh_km": 2.0,
+              "ngan_sach": 0
             }
           }
         ]
       }
     },
     {
-      "id": "case_04_low_confidence",
+      "id": "clarify_missing_allergy",
       "phase": "B",
+      "suite": "base",
       "failure_type": "missing_info",
-      "input": "Ăn gì cũng được, vừa cay lại vừa thanh đạm, no nhưng nhẹ bụng.",
+      "input": "Trưa nay ăn gì ngon nhỉ?",
       "expect": {
         "tool_calls": [
           {
-            "name": "clarify"
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
           }
         ]
       }
     },
     {
-      "id": "case_05_empty_result",
+      "id": "clarify_contradictory_request",
       "phase": "B",
-      "failure_type": "wrong_boundary",
-      "input": "Tôi muốn ăn đồ nước cay nhưng ngân sách chỉ có 10k.",
+      "suite": "base",
+      "failure_type": "missing_info",
+      "input": "Tìm món trong 1km nhưng càng xa càng tốt, giá dưới 30000, không dị ứng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "out_of_scope_programming",
+      "phase": "B",
+      "suite": "base",
+      "failure_type": "out_of_scope",
+      "input": "Giải thích giúp tôi cách viết quicksort bằng Python.",
+      "expect": {
+        "no_tool": true
+      }
+    },
+    {
+      "id": "multiturn_food_after_allergy_answer",
+      "phase": "B",
+      "suite": "base",
+      "failure_type": "wrong_arg_value",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tối nay mình muốn ăn món gì nhẹ bụng."
+        },
+        {
+          "role": "assistant",
+          "content": "Bạn có dị ứng hoặc cần kiêng thành phần nào không?"
+        },
+        {
+          "role": "user",
+          "content": "Không dị ứng, muốn đồ nước thanh đạm trong 3km."
+        }
+      ],
       "expect": {
         "tool_calls": [
           {
             "name": "food_recommendation",
             "args": {
               "loai_mon": "đồ nước",
-              "vi": "cay",
-              "ngan_sach": 10000
+              "vi": "thanh đạm",
+              "di_ung": [],
+              "ban_kinh_km": 3.0,
+              "ngan_sach": 0
             }
           }
         ]
-      }
-    },
-    {
-      "id": "case_06_out_of_scope",
-      "phase": "B",
-      "failure_type": "out_of_scope",
-      "input": "Làm sao để giải phương trình bậc hai?",
-      "expect": {
-        "no_tool": true
       }
     }
   ]
