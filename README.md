@@ -11,6 +11,7 @@
 | 3 | Phạm Đức Liêm | 2A202600985 |
 | 4 | Nguyễn Tuấn Dũng | 2A202600848 |
 | 5 | Nguyễn Quang Minh | 2A202600816 |
+| 6 | Nguyễn Đình Tiến Mạnh | 2A202600907 |
 
 ## 2. Overview Product
 

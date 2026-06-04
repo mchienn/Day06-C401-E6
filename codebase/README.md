@@ -1,13 +1,75 @@
-# Codebase
+# Codebase — Smart Food Finder Chatbot 🍜
 
-Đây là nơi nhóm nộp toàn bộ phần code của prototype. Mục tiêu là để giảng viên và các nhóm khác nhìn được sản phẩm chạy như thế nào, và mỗi thành viên đã đóng góp ra sao.
+## Mô tả
 
-## Nhóm cần làm
+AI Chatbot gợi ý món ăn dựa trên mô tả tự nhiên của người dùng. Hệ thống sử dụng LLM (Gemini) để hiểu intent, sau đó gọi tool lọc dataset nội bộ (hard filter khoảng cách ≤3km + dị ứng + ngân sách) và trả về top 3 món phù hợp nhất.
 
-- Đưa mã nguồn của prototype vào folder này. Nếu prototype được deploy hoặc host ở nơi khác, hãy để lại đường link kèm hướng dẫn truy cập.
-- Trong file `README.md` của nhóm, ghi rõ ba điều: cách chạy prototype (các bước cài đặt và biến môi trường nếu cần), những công cụ và API đã dùng (model AI, framework, công cụ dựng giao diện…), và phần phân công ai làm gì.
-- Mỗi thành viên nên có ít nhất một commit thực chất trong repo — đây là căn cứ để ghi nhận đóng góp của từng người.
+## Cách chạy prototype
 
-## Lưu ý
+### 1. Cài đặt
 
-Đừng commit những thông tin nhạy cảm như API key hay file `.env`. Nếu prototype cần các biến môi trường, hãy dùng một file `.env.example` để mô tả các biến đó thay vì để lộ giá trị thật.
+```bash
+cd codebase
+pip install -r requirements.txt
+```
+
+### 2. Cấu hình API key
+
+Copy `.env.example` thành `.env` và điền API key:
+
+```bash
+cp .env.example .env
+# Điền GEMINI_API_KEY vào file .env
+```
+
+### 3. Chạy chatbot (CLI)
+
+```bash
+python chat.py --provider gemini --version v0
+```
+
+### 4. Chạy chatbot (Streamlit Web UI)
+
+```bash
+streamlit run app.py
+```
+
+## Công cụ và API đã dùng
+
+| Công cụ | Mục đích |
+|---------|----------|
+| **Google Gemini API** | LLM để hiểu intent người dùng, gọi tool, sinh câu trả lời |
+| **Python** | Ngôn ngữ lập trình chính |
+| **Streamlit** | Giao diện web chatbot |
+| **PyYAML** | Đọc khai báo tools |
+
+## Kiến trúc
+
+```
+codebase/
+├── app.py              ← Streamlit chatbot UI
+├── chat.py             ← CLI chatbot
+├── agent.py            ← Agent core (model + tool loop)
+├── env_loader.py       ← Load .env
+├── versioning.py       ← Artifact versioning
+├── artifacts/
+│   ├── system_prompt.md ← System prompt cho AI
+│   └── tools.yaml       ← Khai báo tools cho model
+├── data/
+│   └── dataset_food.json ← Dataset 15 món ăn
+├── providers/           ← Adapter cho các LLM providers
+└── tools/
+    ├── clarify/         ← Tool hỏi lại user
+    └── food_recommendation/ ← Tool lọc & gợi ý món ăn
+```
+
+## Phân công code
+
+| Thành viên | Phần phụ trách |
+|-----------|---------------|
+| Nguyễn Thái Học | Research / evidence |
+| Nguyễn Quang Minh | SPEC sản phẩm |
+| Phạm Đức Liêm | Dataset + prototype |
+| Nguyễn Tuấn Dũng | Prompt flow + logic |
+| Nguyễn Đình Tiến Mạnh | Test / failure path |
+| Nguyễn Minh Chiến | Demo script / repo |

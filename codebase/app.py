@@ -17,7 +17,7 @@ ARTIFACTS_DIR = ROOT / "artifacts"
 TRANSCRIPTS_DIR = ROOT / "transcripts"
 load_lab_env(ROOT)
 
-PROVIDERS = ["openrouter", "openai", "anthropic", "gemini", "opencode"]
+PROVIDERS = ["gemini", "openai", "anthropic", "openrouter", "opencode"]
 VERSIONS = ["v0", "v1", "v2", "v3"]
 
 PAGE_STYLE = """
@@ -177,8 +177,8 @@ def render_tool_call(t: dict) -> None:
 
 # --- Page config & style ---
 st.set_page_config(
-    page_title="Research Agent",
-    page_icon="R",
+    page_title="Smart Food Finder 🍜",
+    page_icon="🍜",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -205,7 +205,7 @@ _initial_artifact_version = build_artifact_version(VERSIONS[0], ARTIFACTS_DIR / 
 with st.sidebar:
     st.markdown("## Configuration")
 
-    provider_name = st.selectbox("Provider", PROVIDERS, index=4)
+    provider_name = st.selectbox("Provider", PROVIDERS, index=0)
     version = st.selectbox("Version", VERSIONS)
     model = st.text_input("Model override", placeholder="Use provider default")
     max_rounds = st.slider("Max tool rounds", 1, 8, 4)
@@ -267,7 +267,7 @@ with st.sidebar:
     st.caption(f"Artifacts: system_prompt.md / tools.yaml @ {version}")
 
 # --- Header ---
-st.markdown('<div class="main-header">Research Agent</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-header">🍜 Smart Food Finder — AI Gợi Ý Món Ăn</div>', unsafe_allow_html=True)
 
 # --- Tool count summary ---
 enabled = [t["name"] for t in tool_declarations]
@@ -288,7 +288,7 @@ for msg in st.session_state.messages:
                     render_tool_call(t)
 
 # --- Chat input ---
-if user_input := st.chat_input("Type your request..."):
+if user_input := st.chat_input("Bạn muốn ăn gì hôm nay? Ví dụ: đồ nước thanh đạm gần Quận 1..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)

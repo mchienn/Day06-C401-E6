@@ -1,0 +1,50 @@
+tools:
+  - name: food_recommendation
+    description: >
+      Tìm kiếm, lọc và gợi ý món ăn từ dataset nội bộ dựa trên nhu cầu của người dùng.
+      Hệ thống áp dụng hard filter (khoảng cách ≤3km, dị ứng, ngân sách) rồi soft match
+      theo loại món và hương vị để trả về top 3 gợi ý phù hợp nhất.
+      Luôn gọi tool này khi người dùng muốn tìm món ăn, gợi ý đồ ăn, hoặc hỏi "ăn gì".
+    parameters:
+      type: object
+      properties:
+        loai_mon:
+          type: string
+          description: "Loại món mong muốn, ví dụ: đồ nước, đồ khô, ăn vặt"
+        vi:
+          type: string
+          description: "Hương vị mong muốn, ví dụ: thanh đạm, đậm đà, cay, chua ngọt"
+        di_ung:
+          type: array
+          items:
+            type: string
+          description: "Danh sách thành phần dị ứng cần tránh, ví dụ: [đậu phộng, hải sản]"
+        ban_kinh_km:
+          type: number
+          description: "Bán kính tối đa tính bằng km (mặc định 3.0)"
+        ngan_sach:
+          type: integer
+          description: "Ngân sách tối đa cho 1 món (VNĐ). 0 = không giới hạn"
+      required: []
+
+  - name: clarify
+    description: >
+      Hỏi lại người dùng khi thông tin chưa đủ hoặc mơ hồ để đưa ra gợi ý chính xác hơn.
+      Sử dụng khi: (1) người dùng chưa nêu loại món hoặc hương vị, (2) yêu cầu mâu thuẫn,
+      (3) cần xác nhận dị ứng trước khi gợi ý.
+    parameters:
+      type: object
+      properties:
+        question:
+          type: string
+          description: "Câu hỏi cần hỏi lại người dùng"
+        response_type:
+          type: string
+          enum: [text, choice]
+          description: "Kiểu trả lời mong đợi: text (tự do) hoặc choice (chọn 1 trong các options)"
+        options:
+          type: array
+          items:
+            type: string
+          description: "Danh sách lựa chọn khi response_type = choice"
+      required: [question]
