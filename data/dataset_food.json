@@ -1,0 +1,195 @@
+[
+    {
+        "id": 1,
+        "name": "Phở Thìn Bờ Hồ",
+        "dish_type": "đồ nước",
+        "taste_tags": [
+            "thanh đạm",
+            "truyền thống",
+            "bò"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 1.2,
+        "allergens": []
+    },
+    {
+        "id": 2,
+        "name": "Bún Mọc Thanh Mai",
+        "dish_type": "đồ nước",
+        "taste_tags": [
+            "thanh đạm",
+            "mọc",
+            "sườn"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 0.8,
+        "allergens": []
+    },
+    {
+        "id": 3,
+        "name": "Hủ Tiếu Nam Vang Thành Đạt",
+        "dish_type": "đồ nước",
+        "taste_tags": [
+            "đậm đà",
+            "tôm",
+            "thịt bằm"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 2.5,
+        "allergens": []
+    },
+    {
+        "id": 4,
+        "name": "Bún Chả Nem Cua Bể",
+        "dish_type": "đồ khô",
+        "taste_tags": [
+            "đậm đà",
+            "chua ngọt",
+            "nướng"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 1.5,
+        "allergens": []
+    },
+    {
+        "id": 5,
+        "name": "Cơm Tấm Ba Ghiền",
+        "dish_type": "đồ khô",
+        "taste_tags": [
+            "đậm đà",
+            "sườn bì chả"
+        ],
+        "location_district": "Phú Nhuận",
+        "distance_km": 4.8,
+        "allergens": []
+    },
+    {
+        "id": 6,
+        "name": "Mì Trộn Tên Lửa",
+        "dish_type": "đồ khô",
+        "taste_tags": [
+            "cay",
+            "đậm đà",
+            "mì gói"
+        ],
+        "location_district": "Quận 3",
+        "distance_km": 2.1,
+        "allergens": []
+    },
+    {
+        "id": 7,
+        "name": "Bún Đậu Mắm Tôm Chí Phèo",
+        "dish_type": "đồ khô",
+        "taste_tags": [
+            "đậm đà",
+            "mắm tôm"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 1.1,
+        "allergens": []
+    },
+    {
+        "id": 8,
+        "name": "Gỏi Cuốn & Bánh Xèo Bà Hai",
+        "dish_type": "ăn vặt",
+        "taste_tags": [
+            "thanh đạm",
+            "cuốn"
+        ],
+        "location_district": "Quận 3",
+        "distance_km": 1.7,
+        "allergens": [
+            "đậu phộng"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Mì Quảng Mỹ Sơn",
+        "dish_type": "đồ nước",
+        "taste_tags": [
+            "đậm đà",
+            "miền trung"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 2.9,
+        "allergens": [
+            "đậu phộng"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Súp Cua Hạnh",
+        "dish_type": "ăn vặt",
+        "taste_tags": [
+            "thanh đạm",
+            "súp"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 0.5,
+        "allergens": []
+    },
+    {
+        "id": 11,
+        "name": "Bún Riêu Nguyễn Cảnh Chân",
+        "dish_type": "đồ nước",
+        "taste_tags": [
+            "đậm đà",
+            "chua cay",
+            "riêu cua"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 1.9,
+        "allergens": []
+    },
+    {
+        "id": 12,
+        "name": "Cháo Lòng Bà Út",
+        "dish_type": "đồ nước",
+        "taste_tags": [
+            "đậm đà",
+            "nóng sốt"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 1.3,
+        "allergens": []
+    },
+    {
+        "id": 13,
+        "name": "Bún Bò Huế Đông Ba",
+        "dish_type": "đồ nước",
+        "taste_tags": [
+            "đậm đà",
+            "cay",
+            "bò"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 5.2,
+        "allergens": []
+    },
+    {
+        "id": 14,
+        "name": "Pad Thai King",
+        "dish_type": "đồ khô",
+        "taste_tags": [
+            "chua ngọt",
+            "cay"
+        ],
+        "location_district": "Quận 3",
+        "distance_km": 2.2,
+        "allergens": [
+            "đậu phộng"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Salad Ức Gà Healthy",
+        "dish_type": "đồ khô",
+        "taste_tags": [
+            "thanh đạm",
+            "ít béo"
+        ],
+        "location_district": "Quận 1",
+        "distance_km": 0.6,
+        "allergens": []
+    }
+]
