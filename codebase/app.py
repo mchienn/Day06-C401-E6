@@ -17,7 +17,7 @@ ARTIFACTS_DIR = ROOT / "artifacts"
 TRANSCRIPTS_DIR = ROOT / "transcripts"
 load_lab_env(ROOT)
 
-PROVIDERS = ["gemini", "openai", "anthropic", "openrouter", "opencode"]
+PROVIDERS = ["openrouter", "gemini", "openai", "anthropic", "opencode"]
 VERSIONS = ["v0", "v1", "v2", "v3"]
 
 PAGE_STYLE = """
@@ -67,6 +67,38 @@ PAGE_STYLE = """
 
 def now_iso() -> str:
     return datetime.now().isoformat(timespec="seconds")
+
+
+def new_transcript_id() -> str:
+    timestamp = datetime.now().strftime("%Y%m%dT%H%M%S%f")
+    return f"streamlit_{timestamp}"
+
+
+def reset_chat_session() -> None:
+    transcript_id = new_transcript_id()
+    st.session_state.messages = []
+    st.session_state.history = []
+    st.session_state.transcript_turns = []
+    st.session_state.transcript_id = transcript_id
+    st.session_state.transcript_path = str(TRANSCRIPTS_DIR / f"{transcript_id}.transcript.json")
+    st.session_state.transcript_created_at = now_iso()
+
+
+def transcript_payload(*, artifact_version, provider_name: str, model: str | None) -> dict:
+    return {
+        "transcript_id": st.session_state.transcript_id,
+        **artifact_version_dict(artifact_version),
+        "provider": provider_name,
+        "model": model or "default",
+        "created_at": st.session_state.transcript_created_at,
+        "updated_at": now_iso(),
+        "turns": st.session_state.transcript_turns,
+    }
+
+
+def write_transcript(path: Path, transcript: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(transcript, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
 
 
 def json_text(value, max_chars: int = 24000) -> str:
@@ -191,6 +223,11 @@ if "history" not in st.session_state:
     st.session_state.history = []
 if "transcript_turns" not in st.session_state:
     st.session_state.transcript_turns = []
+if "transcript_id" not in st.session_state:
+    transcript_id = new_transcript_id()
+    st.session_state.transcript_id = transcript_id
+    st.session_state.transcript_path = str(TRANSCRIPTS_DIR / f"{transcript_id}.transcript.json")
+    st.session_state.transcript_created_at = now_iso()
 if "provider" not in st.session_state:
     st.session_state.provider = None
     st.session_state.provider_name = None
@@ -225,28 +262,22 @@ with st.sidebar:
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Clear chat", use_container_width=True):
-            st.session_state.messages = []
-            st.session_state.history = []
-            st.session_state.transcript_turns = []
+            reset_chat_session()
             st.rerun()
     with col2:
         has_turns = bool(st.session_state.get("transcript_turns"))
         if st.button("New session", use_container_width=True, disabled=not has_turns):
-            st.session_state.messages = []
-            st.session_state.history = []
-            st.session_state.transcript_turns = []
+            reset_chat_session()
             st.rerun()
 
     if st.session_state.get("transcript_turns"):
         st.divider()
         st.markdown("### Transcript")
-        transcript = {
-            **artifact_version_dict(artifact_version),
-            "provider": provider_name,
-            "model": model or "default",
-            "turns": st.session_state.transcript_turns,
-            "created_at": now_iso(),
-        }
+        transcript = transcript_payload(
+            artifact_version=artifact_version,
+            provider_name=provider_name,
+            model=model or None,
+        )
         transcript_json = json.dumps(transcript, ensure_ascii=False, indent=2, default=str)
         st.download_button(
             "Download transcript",
@@ -255,6 +286,7 @@ with st.sidebar:
             mime="application/json",
             use_container_width=True,
         )
+        st.caption(f"Saved to: {st.session_state.transcript_path}")
         col_a, col_b = st.columns(2)
         col_a.metric("Turns", len(st.session_state.transcript_turns))
         col_b.metric("Tools called", sum(
@@ -335,6 +367,7 @@ if user_input := st.chat_input("Bạn muốn ăn gì hôm nay? Ví dụ: đồ n
                 turn = {
                     "turn_index": len(st.session_state.transcript_turns) + 1,
                     "started_at": now_iso(),
+                    "ended_at": now_iso(),
                     "user": user_input,
                     "status": result.get("status", "answered"),
                     "assistant_text": assistant_text,
@@ -342,6 +375,14 @@ if user_input := st.chat_input("Bạn muốn ăn gì hôm nay? Ví dụ: đồ n
                     "tool_events": result.get("tool_events", []),
                 }
                 st.session_state.transcript_turns.append(turn)
+                write_transcript(
+                    Path(st.session_state.transcript_path),
+                    transcript_payload(
+                        artifact_version=artifact_version,
+                        provider_name=provider_name,
+                        model=model or None,
+                    ),
+                )
 
             except Exception as e:
                 st.error(f"Error: {e}")
@@ -350,5 +391,25 @@ if user_input := st.chat_input("Bạn muốn ăn gì hôm nay? Ví dụ: đồ n
                     "content": f"Error: {e}",
                     "tools_used": [],
                 })
+                turn = {
+                    "turn_index": len(st.session_state.transcript_turns) + 1,
+                    "started_at": now_iso(),
+                    "ended_at": now_iso(),
+                    "user": user_input,
+                    "status": "provider_error",
+                    "assistant_text": f"Error: {e}",
+                    "rounds": [],
+                    "tool_events": [],
+                    "error": f"{type(e).__name__}: {e}",
+                }
+                st.session_state.transcript_turns.append(turn)
+                write_transcript(
+                    Path(st.session_state.transcript_path),
+                    transcript_payload(
+                        artifact_version=artifact_version,
+                        provider_name=provider_name,
+                        model=model or None,
+                    ),
+                )
 
 st.markdown("</div>", unsafe_allow_html=True)

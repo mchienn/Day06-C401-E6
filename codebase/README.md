@@ -2,7 +2,7 @@
 
 ## Mô tả
 
-AI Chatbot gợi ý món ăn dựa trên mô tả tự nhiên của người dùng. Hệ thống sử dụng LLM (Gemini) để hiểu intent, sau đó gọi tool lọc dataset nội bộ (hard filter khoảng cách ≤3km + dị ứng + ngân sách) và trả về top 3 món phù hợp nhất.
+AI Chatbot gợi ý món ăn dựa trên mô tả tự nhiên của người dùng. Hệ thống sử dụng LLM qua OpenRouter để hiểu intent, sau đó gọi tool lọc dataset nội bộ (hard filter khoảng cách ≤3km + dị ứng + ngân sách) và trả về top 3 món phù hợp nhất.
 
 ## Cách chạy prototype
 
@@ -19,13 +19,13 @@ Copy `.env.example` thành `.env` và điền API key:
 
 ```bash
 cp .env.example .env
-# Điền GEMINI_API_KEY vào file .env
+# Điền OPENROUTER_API_KEY vào file .env
 ```
 
 ### 3. Chạy chatbot (CLI)
 
 ```bash
-python chat.py --provider gemini --version v0
+python chat.py --provider openrouter --version v0
 ```
 
 ### 4. Chạy chatbot (Streamlit Web UI)
@@ -38,7 +38,7 @@ streamlit run app.py
 
 | Công cụ | Mục đích |
 |---------|----------|
-| **Google Gemini API** | LLM để hiểu intent người dùng, gọi tool, sinh câu trả lời |
+| **OpenRouter API** | LLM để hiểu intent người dùng, gọi tool, sinh câu trả lời |
 | **Python** | Ngôn ngữ lập trình chính |
 | **Streamlit** | Giao diện web chatbot |
 | **PyYAML** | Đọc khai báo tools |
