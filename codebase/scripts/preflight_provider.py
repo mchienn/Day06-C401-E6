@@ -27,7 +27,7 @@ def main() -> None:
     tools = to_openai_tools(load_tool_declarations(args.tools))
     messages = [
         {"role": "system", "content": "You are a tool-routing smoke test. Use tools when appropriate."},
-        {"role": "user", "content": "Tweet mới nhất của Sam Altman là gì?"},
+        {"role": "user", "content": "Tôi muốn ăn đồ nước thanh đạm gần Quận 1"},
     ]
     response = provider.complete(messages, tools, model=args.model, temperature=0.0)
     if not response.tool_calls:
