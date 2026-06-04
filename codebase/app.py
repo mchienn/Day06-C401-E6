@@ -22,45 +22,316 @@ VERSIONS = ["v0", "v1", "v2", "v3"]
 
 PAGE_STYLE = """
 <style>
-    .main-header {
-        font-size: 1.8rem;
-        font-weight: 700;
-        padding: 0.5rem 0 1rem 0;
-        border-bottom: 2px solid #e0e0e0;
-        margin-bottom: 1.5rem;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    /* Global canvas */
+    .stApp {
+        background-color: #F5F5F5 !important;
+        font-family: 'Inter', sans-serif !important;
     }
+
+    /* Sidebar customize */
+    section[data-testid="stSidebar"] {
+        background-color: #FFFFFF !important;
+        border-right: 1px solid #EBEBEB !important;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.02) !important;
+    }
+
+    section[data-testid="stSidebar"] .stMarkdown h2,
+    section[data-testid="stSidebar"] .stMarkdown h3 {
+        color: #222222 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Header Banner styling */
+    .main-header {
+        background-color: #FFFFFF;
+        padding: 1.25rem 2rem;
+        border-radius: 16px;
+        border: 1px solid #EBEBEB;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        margin-bottom: 2rem;
+        text-align: center;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #EE4D2D;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    /* Tool execution badge */
     .tool-badge {
         display: inline-block;
         padding: 2px 8px;
         border-radius: 4px;
         font-size: 0.75rem;
         font-weight: 600;
-        background: #f0f0f0;
-        color: #333;
+        background: #F5F5F5;
+        color: #757575;
         margin-right: 4px;
     }
-    .tool-badge.error { background: #ffe0e0; color: #c00; }
-    .tool-badge.success { background: #e0ffe0; color: #060; }
-    .sidebar-section {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #e0e0e0;
-        margin-bottom: 0.5rem;
-    }
+    .tool-badge.error { background: #FFF0ED; color: #EE4D2D; }
+    .tool-badge.success { background: #FFF0ED; color: #26AA99; }
+
+    /* Metric boxes in sidebar */
     .metric-box {
-        background: #f8f9fa;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        margin: 0.25rem 0;
+        background: #FFF0ED;
+        border: 1px solid #FFF0ED;
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        margin: 0.5rem 0;
     }
-    .metric-box .label { font-size: 0.7rem; color: #666; text-transform: uppercase; }
-    .metric-box .value { font-size: 1.2rem; font-weight: 700; }
+    .metric-box .label { font-size: 0.7rem; color: #EE4D2D; text-transform: uppercase; font-weight: 600; }
+    .metric-box .value { font-size: 1.3rem; font-weight: 700; color: #EE4D2D; }
+
+    /* Chat bubble container styling */
     .chat-container {
         max-width: 900px;
         margin: 0 auto;
+        padding-bottom: 140px;
+    }
+    
+    /* Hide native Streamlit avatar */
+    div[data-testid="stChatMessageAvatar"] {
+        display: none !important;
+    }
+
+    /* Custom Streamlit chat message wraps */
+    div[data-testid="stChatMessage"] {
+        padding: 1rem 1.25rem !important;
+        margin-bottom: 1rem !important;
+        border-radius: 16px !important;
+        max-width: 80% !important;
+        animation: bubbleUp 0.3s ease-out;
+    }
+
+    @keyframes bubbleUp {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* User messages (Shopee Orange) */
+    div[data-testid="stChatMessageUser"] {
+        background-color: #EE4D2D !important;
+        color: #FFFFFF !important;
+        margin-left: auto !important;
+        border-bottom-right-radius: 2px !important;
+        box-shadow: 0 4px 12px rgba(238, 77, 45, 0.12) !important;
+        border: none !important;
+    }
+    div[data-testid="stChatMessageUser"] p,
+    div[data-testid="stChatMessageUser"] span,
+    div[data-testid="stChatMessageUser"] div {
+        color: #FFFFFF !important;
+    }
+
+    /* Assistant messages (Pure White Surface) */
+    div[data-testid="stChatMessageAssistant"] {
+        background-color: #FFFFFF !important;
+        color: #222222 !important;
+        margin-right: auto !important;
+        border-bottom-left-radius: 2px !important;
+        border: 1px solid #EBEBEB !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.03) !important;
+    }
+    div[data-testid="stChatMessageAssistant"] p,
+    div[data-testid="stChatMessageAssistant"] span,
+    div[data-testid="stChatMessageAssistant"] div {
+        color: #222222 !important;
+    }
+
+    /* Expander detail box */
+    .stExpander {
+        background-color: #FFFFFF !important;
+        border-radius: 12px !important;
+        border: 1px solid #EBEBEB !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+    }
+
+    /* Custom Responsive Grid for Food Cards */
+    .food-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.25rem;
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    .food-card {
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        border: 1px solid #EBEBEB;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .food-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+        border-color: #FFF0ED;
+    }
+
+    .food-card-header {
+        background-color: #FFF0ED;
+        padding: 0.8rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .food-avatar {
+        font-size: 1.75rem;
+    }
+
+    .food-tag {
+        background-color: #26AA99;
+        color: #FFFFFF;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 4px;
+        letter-spacing: 0.05em;
+    }
+
+    .food-card-body {
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .food-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #222222;
+        line-height: 1.3;
+    }
+
+    .food-meta {
+        font-size: 0.75rem;
+        color: #757575;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-weight: 500;
+    }
+
+    .meta-dot {
+        font-weight: 700;
+        color: #EBEBEB;
+    }
+
+    .food-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        margin: 0.25rem 0;
+    }
+
+    .tag-pill {
+        background-color: #F5F5F5;
+        color: #757575;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.5rem;
+        border-radius: 9999px;
+        font-weight: 500;
+    }
+
+    .food-reason {
+        font-size: 0.75rem;
+        color: #757575;
+        line-height: 1.4;
+        border-left: 2px solid #EE4D2D;
+        padding-left: 0.5rem;
+        margin-top: 0.25rem;
+        font-style: italic;
+    }
+
+    .food-card-footer {
+        padding: 0.8rem 1rem;
+        border-top: 1px solid #EBEBEB;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFFFFF;
+    }
+
+    .food-price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #EE4D2D;
+    }
+
+    .food-btn {
+        background-color: #EE4D2D;
+        color: #FFFFFF;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.35rem 0.85rem;
+        border-radius: 9999px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border: none;
+    }
+    .food-btn:hover {
+        background-color: #d73e21;
+    }
+
+    /* Suggestion Chips Section */
+    .suggestion-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    div.stButton > button {
+        border-radius: 9999px !important;
+        border: 1px solid #EE4D2D !important;
+        background-color: #FFFFFF !important;
+        color: #EE4D2D !important;
+        padding: 0.3rem 1rem !important;
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 4px rgba(238,77,45,0.03) !important;
+    }
+
+    div.stButton > button:hover {
+        background-color: #EE4D2D !important;
+        color: #FFFFFF !important;
+        border-color: #EE4D2D !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(238,77,45,0.12) !important;
+    }
+
+    /* Custom Input Control styling */
+    div[data-testid="stChatInput"] {
+        background-color: #FFFFFF !important;
+        border-top: 1px solid #EBEBEB !important;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.02) !important;
+    }
+    div[data-testid="stChatInput"] textarea {
+        background-color: #F5F5F5 !important;
+        border-radius: 20px !important;
+        border: 1px solid #EBEBEB !important;
+        padding: 0.5rem 1rem !important;
+        color: #222222 !important;
+    }
+    div[data-testid="stChatInput"] textarea:focus {
+        border-color: #EE4D2D !important;
+        box-shadow: 0 0 0 1px #EE4D2D !important;
     }
     footer { visibility: hidden; }
-    .stChatMessage { padding: 1rem 1.5rem; }
 </style>
 """
 
@@ -101,6 +372,62 @@ def assistant_tool_message(response_text: str | None, calls: list[ToolCall]) -> 
     call_summary = [{"name": c.name, "args": c.args} for c in calls]
     content = response_text or "I will call the selected tool(s)."
     return {"role": "assistant", "content": f"{content}\n\nTOOL_CALLS_JSON:\n{json_text(call_summary)}"}
+
+
+def render_food_cards_html(tools_used: list[dict]) -> str:
+    html = ""
+    for t in tools_used:
+        # Match tool name (either in 'name' or 'tool' key)
+        t_name = t.get("name") or t.get("tool")
+        if t_name == "food_recommendation":
+            result = t.get("result", {})
+            if not isinstance(result, dict):
+                continue
+            items = result.get("items", [])
+            if not items:
+                continue
+            
+            html += '<div class="food-cards-grid">'
+            for item in items:
+                avatar = "🍜"
+                loai_lower = item.get("loai", "").lower()
+                if "khô" in loai_lower:
+                    avatar = "🍛"
+                elif "ăn vặt" in loai_lower:
+                    avatar = "🍟"
+                elif "uống" in loai_lower or "nước" in loai_lower:
+                    if "nước" in loai_lower and "đồ nước" not in loai_lower:
+                        avatar = "🥤"
+                
+                price_val = item.get("gia", 0)
+                price_formatted = f"{price_val:,}".replace(",", ".")
+                
+                html += f"""
+                <div class="food-card">
+                    <div class="food-card-header">
+                        <div class="food-avatar">{avatar}</div>
+                        <div class="food-tag">⚡ FREESHIP</div>
+                    </div>
+                    <div class="food-card-body">
+                        <div class="food-title">{item.get('title', '')}</div>
+                        <div class="food-meta">
+                            <span>📍 {item.get('khoang_cach_km', 0)} km</span>
+                            <span class="meta-dot">•</span>
+                            <span>{item.get('loai', '')}</span>
+                        </div>
+                        <div class="food-tags">
+                            <span class="tag-pill">{item.get('vi', '')}</span>
+                        </div>
+                        <div class="food-reason">{item.get('ly_do_goi_y', '')}</div>
+                    </div>
+                    <div class="food-card-footer">
+                        <span class="food-price">{price_formatted} đ</span>
+                        <div class="food-btn">Đặt món</div>
+                    </div>
+                </div>
+                """
+            html += '</div>'
+    return html
 
 
 def run_model_tool_loop(*, provider, messages, tools, model, max_tool_rounds=4):
@@ -283,12 +610,36 @@ for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
         if "tools_used" in msg and msg["tools_used"]:
+            cards_html = render_food_cards_html(msg["tools_used"])
+            if cards_html:
+                st.markdown(cards_html, unsafe_allow_html=True)
             with st.expander("Tool execution details"):
                 for t in msg["tools_used"]:
                     render_tool_call(t)
 
+# --- Suggestion Chips ---
+st.markdown('<div class="suggestion-container">', unsafe_allow_html=True)
+cols = st.columns(4)
+suggestions = [
+    ("🍜 Đồ nước thanh đạm", "Tôi muốn ăn đồ nước thanh đạm, gần đây"),
+    ("🍛 Đồ khô đậm đà", "Tìm cho tôi món đồ khô hương vị đậm đà"),
+    ("🍟 Ăn vặt gần đây", "Có món ăn vặt gì ngon bán kính dưới 1.5km không"),
+    ("❌ Không đậu phộng", "Gợi ý món ăn ngon và lưu ý tôi dị ứng đậu phộng")
+]
+
+selected_suggestion = None
+for i, (label, query) in enumerate(suggestions):
+    with cols[i]:
+        if st.button(label, key=f"sug_{i}", use_container_width=True):
+            selected_suggestion = query
+st.markdown('</div>', unsafe_allow_html=True)
+
 # --- Chat input ---
-if user_input := st.chat_input("Bạn muốn ăn gì hôm nay? Ví dụ: đồ nước thanh đạm gần Quận 1..."):
+user_input = st.chat_input("Bạn muốn ăn gì hôm nay? Ví dụ: đồ nước thanh đạm gần Quận 1...")
+if selected_suggestion:
+    user_input = selected_suggestion
+
+if user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
@@ -319,6 +670,12 @@ if user_input := st.chat_input("Bạn muốn ăn gì hôm nay? Ví dụ: đồ n
                         tools_used.append({"name": tc["name"], "args": tc["args"], "result": tr})
 
                 st.markdown(assistant_text)
+                
+                # Render food cards if tool was executed
+                cards_html = render_food_cards_html(tools_used)
+                if cards_html:
+                    st.markdown(cards_html, unsafe_allow_html=True)
+                
                 if tools_used:
                     with st.expander("Tool execution details"):
                         for t in tools_used:
