@@ -21,8 +21,7 @@ from .reddit.tool import search_reddit
 from .summarize.tool import summarize_text
 from .translate.tool import translate_text
 from .sentiment.tool import analyze_sentiment
-
-
+from .food_recommendation.tools import filter_and_recommend_food
 # NOTE (starter_v0): tool names here are intentionally vague. These keys are the
 # names the model sees AND the names data/eval_base.json + data/eval_research_extension.json
 # match against. If a team renames a tool, it MUST stay in sync across ALL of:
@@ -45,6 +44,7 @@ TOOL_FUNCTIONS = {
     "summarize": summarize_text,
     "translate": translate_text,
     "sentiment": analyze_sentiment,
+    "food-recommendation": filter_and_recommend_food,
 }
 
 
